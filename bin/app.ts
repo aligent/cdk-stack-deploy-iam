@@ -20,12 +20,11 @@ class StackDeployUser extends cdk.Stack {
           // This should only be updated for BREAKING changes.
           const version = '1'
           const accountId = cdk.Stack.of(this).account;
-          const region = cdk.Stack.of(this).region
           const stackName = cdk.Stack.of(this).stackName.replace(STACK_SUFFIX,'');
 
 
-          const bootstrapCfnIamRole = [`arn:aws:iam::${accountId}:role/cdk-cfn-exec-role-${accountId}-${region}`]
-          const bootstrapIamRoles = [`arn:aws:iam::${accountId}:role/cdk-*-role-${accountId}-${region}`]
+          const bootstrapCfnIamRole = [`arn:aws:iam::${accountId}:role/cdk-cfn-exec-role-${accountId}-*`]
+          const bootstrapIamRoles = [`arn:aws:iam::${accountId}:role/cdk-*-role-${accountId}-*`]
 
           const deployUser = new User(this, 'DeployUser', {
                userName: `${stackName}-deployer`,
